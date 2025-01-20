@@ -1,0 +1,131 @@
+<div class="row mt-3">
+    <div class="col-xl-4 col-lg-4 col-sm-12 col-md-12 " *ngIf="isSidePanelVisible">
+        <div class="card">
+            <div class="card-header bg-secondary">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 h4">
+                        New Customer
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 text-end">
+                        <button class="btn btn-success" (click)="isSidePanelVisible = false" >Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="addForms" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                           <div class="form-group">
+                            <label for="customername">Customer Name</label>
+                            <input id="customername" type="text" formControlName="customername" class="form-control">
+                           </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="mobileno">Mobile No</label>
+                            <input id="mobileno" type="number" formControlName="mobileno" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group" >
+                                <label for="car">Select Car</label>
+                                <select  id="car"  formControlName="car" class="form-control" >
+                                    
+                                    <option  *ngFor="let item of carLists"  [value]="item.carname">{{item.carname}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="date">Bookin Date</label>
+                            <input id="date" type="date" formControlName="date" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="type">Rent Type</label>
+                                <select  id="type"  formControlName="renttype" class="form-control">
+                                    <option value="perhr">Per/Hr</option>
+                                    <option value="perday">Per/Day</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="duration">Rent Duration</label>
+                            <input id="duration" type="number" formControlName="duration" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="noofcars">Number Of Cars</label>
+                                <input id="noofcars" type="number" formControlName="nocar" class="form-control">
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="row pt-3">
+                        
+                            <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary" >Save</button>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 mt-1 text-center">
+                               
+                                <button type="button" class="btn btn-danger" (click)="onClear()">Reset</button>
+                            </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div [className]="isSidePanelVisible ? 'col-xl-8 col-lg-8 col-sm-12 col-md-12':'col-12'">
+        <div class="card">
+            <div class="card-header bg-secondary">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 h4">
+                        Customer List
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 text-end">
+                        <button class="btn btn-success" (click)="isSidePanelVisible = true">Add New</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Customer Name</th>
+                            <th>Car</th>
+                            <th>Rent Type</th>
+                            <th>Duration</th>
+                            <th>No Of Cars</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let items of rentLists; let i=index">
+                            <td>{{i+1}} </td>
+                            <td>{{items.customername}} <br>
+                                {{items.mobileno}}
+                            </td>
+                            <td>{{items.car}} </td>
+                            <td>{{items.renttype}}</td>
+                            <td>{{items.date}} <br>
+                                {{items.duration}}
+                            </td>
+                            <td>{{items.nocar}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

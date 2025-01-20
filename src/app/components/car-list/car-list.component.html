@@ -1,0 +1,97 @@
+<div class="row mt-3">
+    <div class="col-xl-4 col-lg-4 col-sm-12 col-md-12 " *ngIf="isSidePanelVisible">
+        <div class="card">
+            <div class="card-header bg-secondary">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6 h4">
+                        New Car
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-sm-6 col-md-6 text-end">
+                        <button class="btn btn-success" (click)="isSidePanelVisible = false" >Close</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="addForms" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                           <div class="form-group">
+                            <label for="carname">CarName:</label>
+                            <input id="carname" type="text" formControlName="carname" class="form-control">
+                           </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="imgurl">Image url:</label>
+                            <input id="imgurl" type="text" formControlName="image" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="hr">Per Hr/Rate:</label>
+                            <input id="hr" type="number" formControlName="perhr" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <label for="day">Per Day/Rate:</label>
+                            <input id="day" type="number" formControlName="perday" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        
+                            <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary" >Save</button>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 mt-1 text-center">
+                               
+                                <button type="button" class="btn btn-danger" (click)="onClear()">Reset</button>
+                            </div>
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div [className]="isSidePanelVisible ? 'col-xl-8 col-lg-8 col-sm-12 col-md-12':'col-12'">
+        <div class="card">
+            <div class="card-header bg-secondary">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 h4">
+                        Car List
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-sm-12 col-md-12 text-end">
+                        <button class="btn btn-success" (click)="isSidePanelVisible = true">Add New</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Car</th>
+                            <th>Per Hr Rate</th>
+                            <th>Per Day Rate</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let item of carList;let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{item.carname}}</td>
+                            <td>{{item.perhr}} </td>
+                            <td>{{item.perday}}</td>
+                            <td>
+                                <img [src]="item.image" style="width: 50px;height: 50px;">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
